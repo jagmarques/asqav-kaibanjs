@@ -1,6 +1,6 @@
 {
   "name": "asqav-kaibanjs",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "KaibanJS integration for Asqav - cryptographic audit trails for multi-agent task execution",
   "main": "src/index.js",
   "scripts": { "test": "node --test src/test.js" },
