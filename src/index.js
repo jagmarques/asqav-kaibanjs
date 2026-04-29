@@ -1,6 +1,13 @@
 /**
  * Asqav KaibanJS integration - signs task state transitions with cryptographic audit trails.
- * Calls the asqav API directly. No Python SDK dependency.
+ * Calls the Asqav API directly. No SDK dependency.
+ *
+ * Data handling note: this thin client currently sends the full action context
+ * (task ids, status transitions, agent name) to the configured baseUrl. When you
+ * point baseUrl at *.asqav.com, the cloud applies its own server-side controls.
+ * For client-side hash-only behavior matching the @asqav/sdk auto-detection,
+ * use @asqav/sdk directly: init({ apiKey, baseUrl, mode: 'hash-only' }). See
+ * docs/canonicalization.md in the SDK repo for the canonicalization spec.
  */
 
 class AsqavClient {
