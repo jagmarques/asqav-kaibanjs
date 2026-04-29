@@ -6,6 +6,23 @@
 
 Cryptographic audit trails for KaibanJS multi-agent task execution. Signs every task state transition with ML-DSA-65 via the Asqav API.
 
+## Data handling
+
+`asqav-kaibanjs` is a thin client that calls the Asqav API directly. The data sent depends on which deployment you point `baseUrl` at:
+
+- **Asqav cloud (`https://api.asqav.com`):** the cloud applies GDPR-aware data minimization on its side, retaining only the metadata bag (action_type, agent_id, session_id, model_name, tool_name) and storing a hash of the rest where possible.
+- **Self-hosted:** the full action context lands on the server you control, enabling policy checks, PII redaction, and richer audit views.
+
+If you want client-side hash-only behavior with auto-detection (so raw context never leaves your infrastructure when targeting cloud), use the `@asqav/sdk` package directly alongside this integration:
+
+```javascript
+import { init } from '@asqav/sdk';
+
+await init({ apiKey: 'sk_...', baseUrl: 'https://api.asqav.com', mode: 'hash-only' });
+```
+
+See `docs/canonicalization.md` in the SDK repo for the canonicalization spec and conformance vectors.
+
 ## Install
 
 ```
