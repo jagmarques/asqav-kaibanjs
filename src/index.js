@@ -7,7 +7,7 @@
  * point baseUrl at *.asqav.com, the cloud applies its own server-side controls.
  * For client-side hash-only behavior matching the @asqav/sdk auto-detection,
  * use @asqav/sdk directly: init({ apiKey, baseUrl, mode: 'hash-only' }). See
- * docs/canonicalization.md in the SDK repo for the canonicalization spec.
+ * docs/fingerprint-spec.md in the SDK repo for the fingerprint spec.
  */
 
 class AsqavClient {
