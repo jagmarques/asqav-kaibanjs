@@ -1,13 +1,7 @@
 /**
- * Asqav KaibanJS integration - signs task state transitions with cryptographic audit trails.
- * Calls the Asqav API directly. No SDK dependency.
- *
- * Data handling note: this thin client currently sends the full action context
- * (task ids, status transitions, agent name) to the configured baseUrl. When you
- * point baseUrl at *.asqav.com, the cloud applies its own server-side controls.
- * For client-side hash-only behavior matching the @asqav/sdk auto-detection,
- * use @asqav/sdk directly: init({ apiKey, baseUrl, mode: 'hash-only' }). See
- * docs/fingerprint-spec.md in the SDK repo for the fingerprint spec.
+ * Asqav KaibanJS integration. Signs task state transitions to the Asqav API
+ * directly without depending on @asqav/sdk. Sends full action context to the
+ * configured baseUrl; for client-side hash-only behaviour use @asqav/sdk.
  */
 
 class AsqavClient {
@@ -59,32 +53,8 @@ class AsqavClient {
 }
 
 /**
- * KaibanJS store middleware for Asqav audit trails.
- *
- * KaibanJS uses Zustand for state management. This middleware wraps the store's
- * state creator to intercept mutations and sign task status transitions via the
- * Asqav API. Compatible with Zustand's middleware composition pattern used by
- * KaibanJS (devtools, subscribeWithSelector).
- *
- * Usage with a KaibanJS Team's store:
- *   const team = new Team({ ... });
- *   const store = team.useStore();
- *   store.subscribe(
- *     (state) => state.tasks,
- *     (tasks, prevTasks) => {
- *       for (const task of tasks) {
- *         const prev = prevTasks.find(t => t.id === task.id);
- *         if (prev && prev.status !== task.status) {
- *           client.sign('task:transition', {
- *             task_id: task.id,
- *             from: prev.status,
- *             to: task.status,
- *             agent: task.agent?.name || 'unknown'
- *           });
- *         }
- *       }
- *     }
- *   );
+ * Zustand-compatible KaibanJS middleware that signs task status transitions
+ * via the Asqav API on every store mutation. See README for a worked example.
  */
 function createAsqavMiddleware(client) {
   return (config) => (set, get, api) => config((args) => {
@@ -92,7 +62,6 @@ function createAsqavMiddleware(client) {
     set(args);
     const nextState = get();
 
-    // Sign task status transitions
     if (nextState.tasks) {
       for (const task of nextState.tasks) {
         const prevTask = prevState.tasks?.find(t => t.id === task.id);
@@ -102,7 +71,7 @@ function createAsqavMiddleware(client) {
             from: prevTask.status,
             to: task.status,
             agent: task.agent?.name || 'unknown'
-          }).catch(() => {}); // fail-open
+          }).catch(() => {});
         }
       }
     }
@@ -110,16 +79,8 @@ function createAsqavMiddleware(client) {
 }
 
 /**
- * Subscribe to a KaibanJS Team store to sign task transitions.
- * This is the recommended approach since KaibanJS already creates its own
- * Zustand store internally via subscribeWithSelector middleware.
- *
- * Usage:
- *   const team = new Team({ ... });
- *   const client = new AsqavClient({ apiKey: 'sk_...' });
- *   await client.init();
- *   subscribeToTeam(team, client);
- *   await team.start();
+ * Subscribe to a KaibanJS Team store and sign each task status transition.
+ * Preferred over createAsqavMiddleware since KaibanJS already wraps its own store.
  */
 function subscribeToTeam(team, client) {
   const store = team.useStore();
