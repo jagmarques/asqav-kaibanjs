@@ -4,7 +4,7 @@
 
 # asqav-kaibanjs
 
-Cryptographic audit trails for KaibanJS multi-agent task execution. Signs every task state transition with ML-DSA-65 via the Asqav API.
+Compliance-grade audit trails for KaibanJS multi-agent task execution. Signs every task state transition with NIST FIPS 204 ML-DSA-65 via the Asqav API, producing tamper-evident evidence for EU AI Act, DORA, and SOC 2.
 
 ## Data handling
 
@@ -58,7 +58,7 @@ await team.start();
 
 KaibanJS manages agent workflows through a Zustand store with task status transitions (TODO -> DOING -> DONE). The `subscribeToTeam` function hooks into the store's `subscribeWithSelector` middleware to watch for task status changes.
 
-When a task status changes, it calls the Asqav API to sign the transition. The signing happens server-side with ML-DSA-65 (quantum-safe, FIPS 204). The agent never holds the signing key.
+When a task status changes, it calls the Asqav API to sign the transition. The signing happens server-side with ML-DSA-65 (NIST FIPS 204), producing a compliance receipt the agent can never forge. The agent never holds the signing key.
 
 Signing is fail-open. If the API is unreachable, your KaibanJS workflow continues without interruption.
 
@@ -84,7 +84,9 @@ const store = create(
 // Sign any action
 const receipt = await client.sign('task:complete', { task_id: '123', result: 'done' });
 
-// Preflight check before destructive actions
+// Optional preflight check before destructive actions.
+// Requires the cloud preflight endpoint to be enabled on your tier;
+// when unavailable, preflight returns { cleared: true } with a console.warn.
 const check = await client.preflight('data:delete');
 if (check.cleared) {
   // proceed
