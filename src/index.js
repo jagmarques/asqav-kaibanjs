@@ -44,9 +44,13 @@ class AsqavClient {
         headers: { 'Content-Type': 'application/json', 'X-API-Key': this.apiKey },
         body: JSON.stringify({ action_type: actionType })
       });
+      if (!res.ok) {
+        console.warn(`Asqav preflight unavailable (HTTP ${res.status}) - skipping, returning cleared=true`);
+        return { cleared: true, explanation: `Preflight unavailable (HTTP ${res.status}), fail-open` };
+      }
       return await res.json();
     } catch (err) {
-      console.warn('asqav preflight failed (fail-open):', err.message);
+      console.warn('Asqav preflight unavailable - skipping, returning cleared=true:', err.message);
       return { cleared: true, explanation: 'Preflight unavailable, fail-open' };
     }
   }
