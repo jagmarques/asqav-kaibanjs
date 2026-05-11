@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": { "test": "node --test src/test.js" },
   "keywords": ["asqav", "kaibanjs", "ai-governance", "audit-trail"],
-  "author": "jagmarques",
+  "author": "Asqav",
   "license": "MIT",
   "repository": { "type": "git", "url": "https://github.com/jagmarques/asqav-kaibanjs" }
 }
