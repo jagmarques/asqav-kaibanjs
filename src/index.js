@@ -32,7 +32,7 @@ class AsqavClient {
       });
       return await res.json();
     } catch (err) {
-      console.warn('asqav signing failed (fail-open):', err.message);
+      console.warn('Asqav signing failed (fail-open):', err.message);
       return null;
     }
   }
