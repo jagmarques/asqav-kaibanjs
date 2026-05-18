@@ -25,8 +25,22 @@ See [docs/fingerprint-spec.md](https://github.com/jagmarques/asqav-sdk/blob/main
 
 ## Install
 
+`asqav-kaibanjs` is published from this repository as a workspace package; an npm registry release is not yet cut. Use the source path until it lands:
+
+```bash
+git clone https://github.com/jagmarques/asqav-kaibanjs.git
+cd asqav-kaibanjs
+npm install
 ```
-npm install asqav-kaibanjs
+
+Then add it as a local path dependency in your KaibanJS app's `package.json`:
+
+```json
+{
+  "dependencies": {
+    "asqav-kaibanjs": "file:../asqav-kaibanjs"
+  }
+}
 ```
 
 ## Quick start
