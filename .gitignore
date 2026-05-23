@@ -20,3 +20,13 @@ build/
 .company/
 COMPANY.md
 CLAUDE.md
+.cursor/
+.gemini/
+.codex/
+.copilot/
+
+# Secrets
+.github_token
+.env
+.env.*
+!.env.example
