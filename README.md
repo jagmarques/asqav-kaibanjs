@@ -4,7 +4,7 @@
 
 # asqav-kaibanjs
 
-Compliance-grade audit trails for KaibanJS multi-agent task execution. Signs every task state transition with NIST FIPS 204 ML-DSA-65 via the Asqav API, producing tamper-evident evidence for EU AI Act, DORA, and SOC 2.
+Prove what your KaibanJS agents did, task by task. Signs every multi-agent task state transition with NIST FIPS 204 ML-DSA-65 via the Asqav API, producing a tamper-evident record of what each agent attempted. This integration records task transitions as they happen; to stop a rogue agent before it acts, enforce policies on the Asqav side or use a gating integration such as the [MCP server](https://github.com/jagmarques/asqav-mcp).
 
 ## Data handling
 
