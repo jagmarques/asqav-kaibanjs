@@ -70,9 +70,9 @@ await team.start();
 
 ## How it works
 
-KaibanJS manages agent workflows through a Zustand store with task status transitions (TODO -> DOING -> DONE). The `subscribeToTeam` function hooks into the store's `subscribeWithSelector` middleware to watch for task status changes.
+KaibanJS manages agent workflows through a Zustand store with task status transitions from `TODO` to `DOING` to `DONE`. The `subscribeToTeam` function hooks into the store's `subscribeWithSelector` middleware to watch for task status changes.
 
-When a task status changes, it calls the Asqav API to sign the transition. Signing happens server-side with ML-DSA-65 (NIST FIPS 204), so the agent never holds the signing key and cannot forge the resulting compliance receipt.
+When a task status changes, it calls the Asqav API to sign the transition. Signing happens server-side with NIST FIPS 204 ML-DSA-65, so the agent never holds the signing key and cannot forge the resulting compliance receipt.
 
 Signing is fail-open. If the API is unreachable, your KaibanJS workflow continues without interruption.
 
