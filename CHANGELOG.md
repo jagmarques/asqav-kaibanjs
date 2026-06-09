@@ -10,7 +10,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versions follo
 
 ### Changed
 - Comment hygiene sweep across the integration source (#7).
-- `package.json` author rolled to `Asqav`; `package-lock.json` checked in (#6).
+- `package.json` author rolled to `Asqav`, `package-lock.json` checked in (#6).
 - Visible preflight failure plus public email and positioning cleanup (#5).
 - AI-navigation gold-standard comment sweep (#4).
 
