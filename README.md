@@ -4,7 +4,7 @@
 
 # asqav-kaibanjs
 
-Prove what your KaibanJS agents did, task by task. Signs every multi-agent task state transition with NIST FIPS 204 ML-DSA-65 via the Asqav API, producing a tamper-evident record of what each agent attempted. This integration records task transitions as they happen. To stop a rogue agent before it acts, enforce policies on the Asqav side or use a gating integration such as the [MCP server](https://github.com/jagmarques/asqav-mcp).
+Prove what your KaibanJS agents did, task by task. Signs every multi-agent task state transition with NIST FIPS 204 ML-DSA-65 via the Asqav API, producing a tamper-evident record of what each agent attempted. This integration records task transitions as they happen. To stop a rogue agent before it acts, enforce policies on the Asqav side.
 
 ## Data handling
 
