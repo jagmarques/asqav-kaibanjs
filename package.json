@@ -4,7 +4,7 @@
   "description": "KaibanJS integration for Asqav - cryptographic audit trails for multi-agent task execution",
   "homepage": "https://asqav.com",
   "main": "src/index.js",
-  "files": ["src/index.js", "README.md", "LICENSE"],
+  "files": ["src/index.js", "README.md", "LICENSE", "CHANGELOG.md"],
   "scripts": { "test": "node --test src/test.js" },
   "keywords": ["asqav", "kaibanjs", "ai-governance", "audit-trail"],
   "author": "Asqav",
