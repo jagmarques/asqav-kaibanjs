@@ -2,10 +2,14 @@
   "name": "asqav-kaibanjs",
   "version": "0.1.1",
   "description": "KaibanJS integration for Asqav - cryptographic audit trails for multi-agent task execution",
+  "homepage": "https://asqav.com",
   "main": "src/index.js",
+  "files": ["src/index.js", "README.md", "LICENSE"],
   "scripts": { "test": "node --test src/test.js" },
   "keywords": ["asqav", "kaibanjs", "ai-governance", "audit-trail"],
   "author": "Asqav",
   "license": "MIT",
-  "repository": { "type": "git", "url": "https://github.com/jagmarques/asqav-kaibanjs" }
+  "engines": { "node": ">=18" },
+  "repository": { "type": "git", "url": "git+https://github.com/jagmarques/asqav-kaibanjs.git" },
+  "publishConfig": { "access": "public" }
 }
